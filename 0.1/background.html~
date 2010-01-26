@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script language="javascript" type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="background.js"></script>
+  </head>
+  <body />
+</html>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script>
+  function setItem(key, value) {
+    try {
+      window.localStorage.removeItem(key);
+      window.localStorage.setItem(key, value);
+    }catch(e) {
+      console.log("Error writing item to localstorage");
+      console.log(e);
+    }
+    console.log("Return from setItem" + key + ":" +  value);
+  }
+  
+  function getItem(key) {
+    var value;
+    console.log('Get Item:' + key);
+    try {
+      value = window.localStorage.getItem(key);
+    }catch(e) {
+      console.log("Error inside getItem() for key:" + key);
+	  console.log(e);
+	  value = "null";
+    }
+    console.log("Returning value: " + value);
+    return value;
+  }
+
+  function flushStorage() {
+    console.log('about to clear local storage');
+    window.localStorage.clear();
+    console.log('cleared');
+  }
+</script>
+</head>
+</html>

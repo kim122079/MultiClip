@@ -1,3 +1,40 @@
+  var key1 = "clip1";
+  var key2 = "clip2";
+  var clip1 = "<empty>";
+  var clip2 = "<empty>";
+
+  setItem(key1, clip1);
+  setItem(key2, clip2);
+
+  function store(text) {
+
+        var oldText = chrome.extension.getBackgroundPage().getItem(key1);
+	
+        shiftClips(text);
+
+        logAllKeyValues();
+
+        setItem(key1,clip1);
+        setItem(key2,clip2);
+  }
+
+  function logAllKeyValues() {
+     	console.log(key1 + ":" + clip1);
+	console.log(key2 + ":" + clip2);
+  }
+
+  function shiftClips(newClip) {
+        clip2 = clip1;
+        clip1 = newClip;
+  }
+
+  function getClippings() {
+  	var clippings = new Object();
+	clippings.clip1 = getItem(key1);
+	clippings.clip2 = getItem(key2);
+	return clippings;
+  }
+
   function setItem(key, value) {
     try {
       window.localStorage.removeItem(key);
@@ -24,15 +61,13 @@
   }
 
   function flushStorage() {
-    console.log('about to clear local storage');
     window.localStorage.clear();
-    console.log('cleared');
   }
 
 const extension = chrome.extension;
       extension.onConnect.addListener(function(port) { 
         port.onMessage.addListener(function(data) {
-          if (data.clip && msg.clip != "")  
-	     setItem('clip1');
+          if (data.clip && data.clip != "")  
+	     store(data.clip);
         });
 });

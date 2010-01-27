@@ -41,7 +41,7 @@ div#wrapper ul#clipList li a{
   font-size: 12px;
 }
 
-#clipping {
+.clipping {
   display: none;
 }
 

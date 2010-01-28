@@ -1,11 +1,8 @@
   var key1 = "clip1";
   var key2 = "clip2";
-  var clip1 = "empty";
-  var clip2 = "empty";
-
-  setItem(key1, clip1);
-  setItem(key2, clip2);
-
+  var clip1 = "";
+  var clip2 = "";
+  
   function store(text) {
 
         var oldText = chrome.extension.getBackgroundPage().getItem(key1);
@@ -30,7 +27,7 @@
 
   function getClippings() {
   	var clippings = new Object();
-	clippings.clip1 = getItem(key1);
+        clippings.clip1 = getItem(key1);
 	clippings.clip2 = getItem(key2);
 	return clippings;
   }

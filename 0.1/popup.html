@@ -4,53 +4,16 @@
   <head>
     <link rel='stylesheet' type='text/css' href='content.css' media='all' />
     <script language="javascript" type="text/javascript" src="jquery-1.3.2.js"></script>
-    <script>
-
-      function init() {
-        
-	var clippings = chrome.extension.getBackgroundPage().getClippings();	
-        updateValues(clippings);
-      }
-
-      
-      
-      function updateValues(clippings) {
-	if(clippings.clip1 != "") {
-		$("#clipList").innerHTML = "";      
-		$("#clipList").append('<li id="clip1"><p>' + clippings.clip1 + '</p><a class="delete"><img src="removeButton.png" width="20" height="20"/></a></li>');
-		$(".delete").mousedown(function(){
-		   var clipID = $(this).parent().attr("id");
-		   $(this).parent().slideUp("fast",function(){
-	   	   	$(this).parent().remove();
-	    	   });
-		   chrome.extension.getBackgroundPage().setItem(clipID,"");
-		});
-	}
-        else {
-        	$("#clipList").innerHTML = "<li>No clippings yet...</li>";
-        }
-      }
-
-      function clearStorage() {
-	      try {
-	         chrome.extension.getBackgroundPage().flushStorage();
-	      }catch(e) {
-	        console.log("error while flushing local storage");
-	        console.log(e);
-	      }
-
-	      $('#cl1').innerHTML = "";
-	      $('#cl2').innerHTML = "";
-      }
-
-    </script>
+    <script language="javascript" type="text/javascript" src="ZeroClipboard.js"></script>
+    <script language="javascript" type="text/javascript" src="popup.js"></script>
   </head>
   <body onload='init()'>
       <div id="wrapper">
   	  <h1>Clipping Board</h1>
           <ul id="clipList">
+		<li id="clip1"><p>' + clippings.clip1 + '</p><a>copy</a><a class="delete">remove</a></li>
+		<li id="clip2"><p>' + clippings.clip1 + '</p><a>copy</a><a class="delete">remove</a></li>
           </ul>
-	  <a onclick='clearStorage()'>flush clipboard!</a>
       </div>
   </body>
 </html>

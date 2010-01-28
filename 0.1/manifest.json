@@ -10,8 +10,8 @@
    ],
    "background_page": "background.html",
    "browser_action": {
-      "default_icon": "sample-16x16.png",
-      "default_title": "Easy Clipboard",
+      "default_icon": "multiclipboard_icon_19x19.png",
+      "default_title": "Multiclipboard",
       "popup" : "popup.html"
    },
    "content_scripts": [ {

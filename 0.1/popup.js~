@@ -1,0 +1,26 @@
+function init() {
+var clip = new ZeroClipboard.Client();
+        clip.setText("TEst");	
+var clippings = chrome.extension.getBackgroundPage().getClippings();	
+	updateValues(clippings);
+}
+      
+function updateValues(clippings) {
+	$("#clipList").innerHTML = "";	
+	if(clippings.clip1 != "" && clippings.clip1 != "undefined")
+		$("#clipList").append('<li id="clip1"><p>' + clippings.clip1 + '</id="d_clip_button"><a>copy</div><a class="delete">remove</a></li>');
+	
+	if (clippings.clip2 != "" && clippings.clip2 != "undefined")
+		$("#clipList").append('<li id="clip2"><p>' + clippings.clip2 + '</div id="d_clip_button"><a>copy</div><a class="delete">remove</a></li>');
+
+	$(".delete").mousedown(function(){
+		   var clipID = $(this).parent().attr("id");
+		   var parent = $(this).parent();
+		   parent.slideUp("fast",function(){
+			var parent1 = parent;   	       	   
+			parent.remove();
+   		   });
+	chrome.extension.getBackgroundPage().setItem(clipID,"");
+	});
+}
+

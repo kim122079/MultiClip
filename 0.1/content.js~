@@ -6,29 +6,38 @@ function postSelectedText() {
 	var text = window.getSelection().toString();	
 	if (text != '') {
 		port.postMessage({clip: text});
-		dismissDialog();
 	} 
 }
 
 function showDialog() {
     	$('body').append(
-    	'<div id="dialog"><a id="clip">clip</a></div>');
-	$("#dialog:hidden").toggle("def");
-	$('#clip').mousedown(function(){
-   	   postSelectedText();
+    	'<div id="dialog">text clipped!</div>');
+	$("#dialog:hidden").toggle("normal", function(){
+   	   sleep(1000);
     	});
+	//$('#clip').mousedown(function(){
+   	//   postSelectedText();
+    //	});
 }
 
 function dismissDialog() {
-	$("#dialog").toggle("def",function(){
+	$("#dialog").toggle("normal",function(){
    	   $("#dialog").remove();
     	});
 }
 
+function sleep(ms) {
+ 	var now=(new Date()).getTime(); 
+        var sleepTime = now + ms; 
+        while((new Date()).getTime() < sleepTime) { };
+}
+
 $().keypress(function(event) {
 	//3 == Strg+Shift+C
-    	if (event.which == 67) {
+    	if (event.which == 3) {
+		postSelectedText();		
 		showDialog();
+                dismissDialog()
     	}
 });
 

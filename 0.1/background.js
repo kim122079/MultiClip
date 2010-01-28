@@ -6,17 +6,19 @@ const extension = chrome.extension;
       extension.onConnect.addListener(function(port) { 
         port.onMessage.addListener(function(data) {
           if (data.clip && data.clip != "")  
-	     
-		if(data.URL && data.URL != "") {
-			storeClipping(data.clip, data.URL);
-		}
-		else {
-			storeClipping(data.clip, "");		
+	        var snapshot = false; 
+		chrome.tabs.captureVisibleTab(null, function(dataUrl) {
+						snapshot = true;
+						storeClipping(data.clip, data.URL, dataUrl);
+						}
+		);
+		if(snapshot) {
+			storeClipping(data.clip, data.URL, "");
 		}
         });
 });
 
-function storeClipping(text, URL) {
+function storeClipping(text, URL, snapshot) {
 	var clipIDs;
         
         var clipData = getClip(clipKeysID);	
@@ -30,9 +32,9 @@ function storeClipping(text, URL) {
 	var newClipID = new Date().getTime().toString();
 
 	var clipItem = new Object();
-	//TODO save URL which text was copied from
 	clipItem.originURL = URL;
 	clipItem.clippedText = text;
+	clipItem.snapshotURL = snapshot;
 	
 	if(clipIDs.length >= MAX_CLIPPINGS) {
 		var clipID = clipIDs.pop();

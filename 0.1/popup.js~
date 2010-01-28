@@ -16,9 +16,10 @@ function init() {
 			}
 		
 			if(clipItem != "undefined" && clipItem.clippedText != "") {
-				$("#clipList").append('<li><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
+				$("#clipList").append('<li><img src="' + clipItem.snapshotURL + '" width="106" height="80"/><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
 				console.log(clipItem.originURL);
 				console.log(clipItem.clippedText);
+				console.log(clipItem.snapshotURL);
 			}
 		}
 		$(".delete").mousedown(function(){
@@ -60,7 +61,6 @@ function init() {
 }
       
 function flushClippings() {
-	alert("This will remove all clippings!");	
 	var clipList = $("#clipList");
 	chrome.extension.getBackgroundPage().flushClippings();
 	clipList.slideUp("fast",function(){

@@ -16,9 +16,10 @@ function init() {
 			}
 		
 			if(clipItem != "undefined" && clipItem.clippedText != "") {
-				$("#clipList").append('<li><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
+				$("#clipList").append('<li><img src="' + clipItem.snapshotURL + '" width="133" height="100"/><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
 				console.log(clipItem.originURL);
 				console.log(clipItem.clippedText);
+				console.log(clipItem.snapshotURL);
 			}
 		}
 		$(".delete").mousedown(function(){

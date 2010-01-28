@@ -4,7 +4,7 @@ const port = extension.connect({name: "clipper"});
 
 function postSelectedText() {
 	var curURL = window.location.href;	
-	var text = window.getSelection().toString();	
+	var text = window.getSelection().toString();
 	if (text != '') {
 		port.postMessage({clip: text, URL: curURL});
 	} 
@@ -13,6 +13,8 @@ function postSelectedText() {
 function showDialog() {
     	$('body').append(
     	'<div id="dialog">text clipped!</div>');
+	var xPos = screen.width - 300 + "px";
+	$("#dialog").css("left", xPos);
 	$("#dialog:hidden").toggle("normal", function(){
    	   sleep(1000);
     	});

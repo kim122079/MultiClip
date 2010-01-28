@@ -10,7 +10,7 @@
    ],
    "background_page": "background.html",
    "browser_action": {
-      "default_icon": "multiclipboard_icon_9.png",
+      "default_icon": "multiclipboard_icon_19x19.png",
       "default_title": "Multiclipboard",
       "popup" : "popup.html"
    },

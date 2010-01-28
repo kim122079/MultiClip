@@ -11,8 +11,6 @@
       <div id="wrapper">
   	  <h1>Clipping Board</h1>
           <ul id="clipList">
-		<li id="clip1"><p>' + clippings.clip1 + '</p><a>copy</a><a class="delete">remove</a></li>
-		<li id="clip2"><p>' + clippings.clip1 + '</p><a>copy</a><a class="delete">remove</a></li>
           </ul>
       </div>
   </body>

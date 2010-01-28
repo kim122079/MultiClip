@@ -1,16 +1,28 @@
 function init() {
-	var clippings = chrome.extension.getBackgroundPage().getClippings();	
-	updateValues(clippings);
-}
-      
-function updateValues(clippings) {
 	$("#clipList").innerHTML = "";	
-	if(clippings.clip1 != "" && clippings.clip1 != "undefined")
-		$("#clipList").append('<li id="clip1"><p>' + clippings.clip1 + '</p><a>copy</a><a class="delete">remove</a></li>');
-	
-	if (clippings.clip2 != "" && clippings.clip2 != "undefined")
-		$("#clipList").append('<li id="clip2"><p>' + clippings.clip2 + '</p><a>copy</a><a class="delete">remove</a></li>');
 
+	var clippings = chrome.extension.getBackgroundPage().getClippings();	
+	
+	if(clippings == null) {
+		console.log("failure clippings was null!!!!");		
+		return;	
+	}
+	
+	var items = clippings.split("},");
+
+	for(i=0; i<items.length; i++) {
+		var item = items[i];	
+		if(i != items.length-1)	
+			item += "}";
+		console.log("item" + item);
+		var clipItem = 	JSON.parse(item);
+		console.log(clipItem.originURL);
+		console.log(clipItem.clippedText);
+		if(clipItem != "undefined" && clipItem.clippedText != "") {
+			$("#clipList").append('<li><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a></li>');
+		}
+	}	
+	
 	$(".delete").mousedown(function(){
 		   var clipID = $(this).parent().attr("id");
 		   var parent = $(this).parent();
@@ -18,8 +30,12 @@ function updateValues(clippings) {
 			var parent1 = parent;   	       	   
 			parent.remove();
    		   });
-	chrome.extension.getBackgroundPage().setItem(clipID,"");
-	});
+	//chrome.extension.getBackgroundPage().setItem(clipID,"");
+	});	
+}
+      
+function flushStorage() {
+	chrome.extension.getBackgroundPage().flushStorage();	
 }
 
 function copyTextToClipboard(text) {

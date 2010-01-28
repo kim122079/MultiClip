@@ -1,35 +1,41 @@
-var key1 = "clip1";
-var key2 = "clip2";
-var clip1 = "";
-var clip2 = "";
+var MAX_CLIPPINGS = 5;
+var dataKey = "clipData";
+var itemCount = 0;
+const extension = chrome.extension;
+      extension.onConnect.addListener(function(port) { 
+        port.onMessage.addListener(function(data) {
+          if (data.clip && data.clip != "")  
+	     store(data.clip);
+        });
+});
 
 function store(text) {
+	var clipItems;	
+	var clipData = getItem(dataKey);	
+	if(clipData == null) {
+		clipItems = new Array()		
+	}
+	else {
+		clipItems = clipData.split("},");	
+	}
 
-	var oldText = chrome.extension.getBackgroundPage().getItem(key1);
+	var clipItem = new Object();
+	//TODO save URL which text was copied from
+	clipItem.originURL = "URL: " + itemCount;
+	clipItem.clippedText = text;
+	
+	if(clipItems.length > MAX_CLIPPINGS)	
+		clipItems.pop();
+	
+	clipItems.unshift(JSON.stringify(clipItem));
 
-	shiftClips(text);
+	setItem(dataKey,clipItems);
 
-	logAllKeyValues();
-
-	setItem(key1,clip1);
-	setItem(key2,clip2);
-}
-
-function logAllKeyValues() {
-	console.log(key1 + ":" + clip1);
-	console.log(key2 + ":" + clip2);
-}
-
-function shiftClips(newClip) {
-	clip2 = clip1;
-	clip1 = newClip;
+	itemCount++;
 }
 
 function getClippings() {
-	var clippings = new Object();
-	clippings.clip1 = getItem(key1);
-	clippings.clip2 = getItem(key2);
-	return clippings;
+	return getItem(dataKey);
 }
 
 function setItem(key, value) {
@@ -51,7 +57,7 @@ function getItem(key) {
 	}catch(e) {
 	console.log("Error inside getItem() for key:" + key);
 	 	 console.log(e);
-	  	value = "null";
+	  	value = null;
 	}
 	console.log("Returning value: " + value);
 	return value;
@@ -60,11 +66,3 @@ function getItem(key) {
 function flushStorage() {
 	window.localStorage.clear();
 }
-
-const extension = chrome.extension;
-      extension.onConnect.addListener(function(port) { 
-        port.onMessage.addListener(function(data) {
-          if (data.clip && data.clip != "")  
-	     store(data.clip);
-        });
-});

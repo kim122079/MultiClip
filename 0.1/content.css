@@ -1,6 +1,6 @@
 div#wrapper {
   width: 300px;
-  height: 400px;
+  height: auto;
   background-color: #fff;
   color: #4D4D4E;
 }
@@ -17,10 +17,11 @@ div#wrapper h1 {
 div#wrapper ul#clipList {
   margin: 5px  0 10px 0;
   padding: 5px 0px 15px 0;
+  border-bottom: 1px solid #ccc;
 }
 
 div#wrapper ul#clipList li{
-  padding: 5px 0 8px 0;
+  padding: 5px 0 7px 0;
   margin: 0 0 10px 0;
   color: #000;
   display:block;
@@ -34,24 +35,25 @@ div#wrapper ul#clipList li p{
   font-weight: bold;
 }
 
-div#wrapper ul#clipList a{
+div#wrapper a {
   text-decoration: underline;
   color: #000;
-  margin: 0 0 0 110px;
-}
-
-div#wrapper ul#clipList li a{
   color: #3399D5;
   font-size: 12px;
   cursor:pointer
 }
 
-div#wrapper ul#clipList li a.delete {
-  margin: 0 0 0 20px;
+div#wrapper a.removeAll {
+  text-decoration: none;
 }
 
-#clipping {
-  display: none;
+div#wrapper ul#clipList a{
+  margin: 0 0 0 80px;
+}
+
+div#wrapper ul#clipList li a.delete, 
+div#wrapper ul#clipList li a.origin {
+  margin: 0 0 0 20px;
 }
 
 div#dialog {

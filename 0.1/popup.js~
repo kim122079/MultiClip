@@ -3,43 +3,72 @@ function init() {
 
 	var clippings = chrome.extension.getBackgroundPage().getClippings();	
 	
-	if(clippings == null) {
-		console.log("failure clippings was null!!!!");		
-		return;	
-	}
-	
-	var items = clippings.split("},");
-
-	for(i=0; i<items.length; i++) {
-		var item = items[i];	
-		if(i != items.length-1)	
-			item += "}";
-		console.log("item" + item);
-		var clipItem = 	JSON.parse(item);
-		console.log(clipItem.originURL);
-		console.log(clipItem.clippedText);
-		if(clipItem != "undefined" && clipItem.clippedText != "") {
-			$("#clipList").append('<li><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a></li>');
+	if(clippings != null) {
+		clipIDs = clippings.split(",");
+		for(i=0; i<clipIDs.length; i++) {
+			var clipID = clipIDs[i];	
+			console.log("clipID: " + clipID);		
+		
+			var clipItem;
+			var item = chrome.extension.getBackgroundPage().getClip(clipID);
+			if(item != null) {
+				var clipItem = JSON.parse(item);
+			}
+		
+			if(clipItem != "undefined" && clipItem.clippedText != "") {
+				$("#clipList").append('<li><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
+				console.log(clipItem.originURL);
+				console.log(clipItem.clippedText);
+			}
 		}
+		$(".delete").mousedown(function(){
+			   var clipID = $(this).parent().attr("id");
+			   var parent = $(this).parent();
+			   parent.slideUp("fast",function(){
+				var parent1 = parent;   	       	   
+				parent.remove();
+				chrome.extension.getBackgroundPage().removeClip(clipID);
+	   		   });
+		});
+		
+		$(".origin").mousedown(function(){
+			   var href = $(this).attr("href");
+			   var activeTabID;
+			   
+			   chrome.tabs.getAllInWindow(null, function(tabs) {
+				for(i=0; i<tabs.length; i++) {
+					if(tabs[i].url == href) {
+						activeTabID = tabs[i].id;
+					}
+				}
+				
+			   });
+
+			   if(activeTabID) {
+			   	//Todo remove create and switch to tab with ID and focus...
+				chrome.tabs.create({"url":href});
+			   }
+			   else {
+			   	chrome.tabs.create({"url":href});
+			   }
+		});				
+	}
+	else {
+		console.log("failure loading clippings");		
+		return;		
 	}	
-	
-	$(".delete").mousedown(function(){
-		   var clipID = $(this).parent().attr("id");
-		   var parent = $(this).parent();
-		   parent.slideUp("fast",function(){
-			var parent1 = parent;   	       	   
-			parent.remove();
-   		   });
-	chrome.extension.getBackgroundPage().setItem(clipID,"");
-	});	
 }
       
-function flushStorage() {
-	chrome.extension.getBackgroundPage().flushStorage();	
+function flushClippings() {
+	alert("This will remove all clippings!");	
+	var clipList = $("#clipList");
+	chrome.extension.getBackgroundPage().flushClippings();
+	clipList.slideUp("fast",function(){
+		clipList.remove();
+        });	
 }
 
 function copyTextToClipboard(text) {
 	var clip = new ZeroClipboard.Client();
         clip.setText(text);
-        clip.glue('d_clip_button');
 }

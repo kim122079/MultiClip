@@ -3,9 +3,10 @@ const extension = chrome.extension;
 const port = extension.connect({name: "clipper"});
 
 function postSelectedText() {
+	var curURL = window.location.href;	
 	var text = window.getSelection().toString();	
 	if (text != '') {
-		port.postMessage({clip: text});
+		port.postMessage({clip: text, URL: curURL});
 	} 
 }
 

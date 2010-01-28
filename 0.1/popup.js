@@ -16,12 +16,19 @@ function init() {
 			}
 		
 			if(clipItem != "undefined" && clipItem.clippedText != "") {
-				$("#clipList").append('<li><img src="' + clipItem.snapshotURL + '" width="133" height="100"/><p>' + clipItem.clippedText + '</p><a>copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
+				$("#clipList").append('<li id="' + clipID + '"><img src="' + clipItem.snapshotURL + '" width="133" height="100"/><p>' + clipItem.clippedText + '</p><a class="copy">copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
+				
 				console.log(clipItem.originURL);
 				console.log(clipItem.clippedText);
 				console.log(clipItem.snapshotURL);
 			}
 		}
+		
+		$(".copy").mousedown(function(){
+			copyTextToClipboard("")
+		});
+		
+		
 		$(".delete").mousedown(function(){
 			   var clipID = $(this).parent().attr("id");
 			   var parent = $(this).parent();
@@ -69,6 +76,5 @@ function flushClippings() {
 }
 
 function copyTextToClipboard(text) {
-	var clip = new ZeroClipboard.Client();
-        clip.setText(text);
+	alert("chrome does not support copying text to clipboard yet. Coming soon...")
 }

@@ -24,6 +24,6 @@ function updateValues(clippings) {
 
 function copyTextToClipboard(text) {
 	var clip = new ZeroClipboard.Client();
-        clip.setText( 'Copy me!' );
-        clip.glue( 'd_clip_button' );
+        clip.setText(text);
+        clip.glue('d_clip_button');
 }

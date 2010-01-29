@@ -2,9 +2,6 @@
    "name": "clipper",
    "description": "Clip multiple snippets.",
    "version": "0.1",
-   "icons": {
-      "32": "32.png"
-   },
    "permissions": [
     "tabs", "http://*/*", "https://*/*"
    ],

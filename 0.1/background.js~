@@ -1,4 +1,4 @@
-var MAX_CLIPPINGS = 5;
+var MAX_CLIPPINGS = window.localStorage["clipboard_size"];
 var clipKeysID = "clipData";
 var itemCount = 0;
 var badgeCount = 0;
@@ -65,7 +65,7 @@ function removeClippings(key) {
 	var newClipIDs = new Array();		
 	var oldClipIDs = getClip(clipKeysID).split(",");
 	
-	if(oldClipIDs.length == 0) {	
+	if(oldClipIDs.length == 1) {	
 		removeClip(clipKeysID);
 	}
 	else {	

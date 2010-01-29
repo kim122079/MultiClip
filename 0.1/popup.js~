@@ -37,7 +37,7 @@ function init() {
 			   parent.slideUp("fast",function(){
 				var parent1 = parent;   	       	   
 				parent.remove();
-				chrome.extension.getBackgroundPage().removeClip(clipID);
+				chrome.extension.getBackgroundPage().removeClippings(clipID);
 	   		   });
 		});
 		

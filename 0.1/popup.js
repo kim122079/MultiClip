@@ -78,5 +78,5 @@ function flushClippings() {
 }
 
 function copyTextToClipboard(text) {
-	alert("chrome does not support copying text to clipboard yet. Coming soon...")
+	alert("Chrome does not support copying text to clipboard yet. Coming soon...")
 }

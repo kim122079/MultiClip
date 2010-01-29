@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head><title>Multiclipboard Options</title>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var clipboardSize = document.form.clipboard_size.value;
+  var dialogTimeout = document.form.dialog_timeout.value;
+  window.localStorage["clipboard_size"] = clipboardSize;
+  window.localStorage["dialog_timeout"] = dialogTimeout;
+
+  // Update status to let user know options were saved.
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved.";
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 1500);
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  var clipboardSize = window.localStorage["clipboard_size"];
+  var dialogTimeout = window.localStorage["dialog_timeout"];
+  if (!clipboardSize) {
+    clipboardSize = 5;
+  }
+  if (!dialogTimeout) {
+    dialogTimeout = 1500;
+  }
+  document.form.clipboard_size.value = clipboardSize;
+  document.form.dialog_timeout.value = dialogTimeout;
+}
+
+</script>
+</head>
+<body onload="restore_options()">
+<div id="status"></div>
+<form name="form">
+<label>Clipboard Size: </label><input name="clipboard_size" type="text" size="30" maxlength="30"/>
+<label>Dialog Timeout: </label><input name="dialog_timeout" type="text" size="30" maxlength="40"/>
+<button onclick="save_options()">Save</button>
+</form>
+</body>
+</html>

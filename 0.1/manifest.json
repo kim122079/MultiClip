@@ -1,6 +1,6 @@
 {
-   "name": "clipper",
-   "description": "Clip multiple snippets.",
+   "name": "multiclipboard",
+   "description": "Clip multiple text snippets.",
    "version": "0.1",
    "options_page": "options.html",
    "permissions": [

@@ -1,6 +1,8 @@
 var MAX_CLIPPINGS = 5;
 var clipKeysID = "clipData";
 var itemCount = 0;
+var badgeCount = 0;
+
 
 const extension = chrome.extension;
       extension.onConnect.addListener(function(port) { 
@@ -46,11 +48,37 @@ function storeClipping(text, URL, snapshot) {
 
 	setClip(clipKeysID, clipIDs);
 
+	updateBadge(clipIDs.length);
+
 	itemCount++;
+}
+
+function updateBadge(badgeCount) {
+	chrome.browserAction.setBadgeText({"text": "" + badgeCount});
 }
 
 function getClippings() {
 	return getClip(clipKeysID);
+}
+
+function removeClippings(key) {
+	var newClipIDs = new Array();		
+	var oldClipIDs = getClip(clipKeysID).split(",");
+	
+	if(oldClipIDs.length == 1) {	
+		removeClip(clipKeysID);
+	}
+	else {	
+		for(var i = 0; i<oldClipIDs.length; i++) {
+			if(oldClipIDs[i] != key) {
+				newClipIDs.unshift(oldClipIDs[i]);
+			}
+		}
+		setClip(clipKeysID, newClipIDs);
+	}
+
+	removeClip(key);
+	updateBadge(newClipIDs.length);
 }
 
 function setClip(key, value) {
@@ -89,4 +117,5 @@ function getClip(key) {
 
 function flushClippings() {
 	window.localStorage.clear();
+	updateBadge(0);
 }

@@ -16,7 +16,7 @@ function showDialog() {
 	var xPos = screen.width - 300 + "px";
 	$("#dialog").css("left", xPos);
 	$("#dialog:hidden").toggle("normal", function(){
-   	   sleep(2000);
+   	   sleep(1000);
     	});
 }
 

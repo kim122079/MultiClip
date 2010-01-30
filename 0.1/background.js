@@ -4,23 +4,17 @@ var itemCount = 0;
 var badgeCount = 0;
 
 
-const extension = chrome.extension;
-      extension.onConnect.addListener(function(port) { 
-        port.onMessage.addListener(function(data) {
-          if (data.clip && data.clip != "")  
-	        var snapshot = false; 
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) { 
+          if (request.clip && request.clip != "") {
+		var tab = sender.tab;
 		chrome.tabs.captureVisibleTab(null, function(dataUrl) {
-						snapshot = true;
-						storeClipping(data.clip, data.URL, dataUrl);
+						storeClipping(request.clip, tab, dataUrl);
 						}
 		);
-		if(snapshot) {
-			storeClipping(data.clip, data.URL, "");
-		}
-        });
+        }
 });
 
-function storeClipping(text, URL, snapshot) {
+function storeClipping(text, tab, snapshot) {
 	var clipIDs;
         
         var clipData = getClip(clipKeysID);	
@@ -34,7 +28,7 @@ function storeClipping(text, URL, snapshot) {
 	var newClipID = new Date().getTime().toString();
 
 	var clipItem = new Object();
-	clipItem.originURL = URL;
+	clipItem.URL = tab.url;
 	clipItem.clippedText = text;
 	clipItem.snapshotURL = snapshot;
 	
@@ -86,17 +80,16 @@ function setClip(key, value) {
 		window.localStorage.removeItem(key);
 		window.localStorage.setItem(key, value);
 	}catch(e) {
-		console.log("Error writing item to localstorage");
+		console.log("Error writing item to localstorage for key: " + key + " value: " + value);
 		console.log(e);
 	}
-	console.log("Return from setItem" + key + ":" +  value);
 }
 
 function removeClip(key) {
 	try {
 		window.localStorage.removeItem(key);
 	}catch(e) {
-		console.log("Error removing item from localstorage");
+		console.log("Error removing item to localstorage for key:" + key);
 		console.log(e);
 	}
 }
@@ -107,11 +100,10 @@ function getClip(key) {
 	try {
 		value = window.localStorage.getItem(key);
 	}catch(e) {
-	console.log("Error inside getItem() for key:" + key);
+	console.log("Error getting item to localstorage for key:" + key);
 	 	 console.log(e);
 	  	value = null;
 	}
-	console.log("Returning value: " + value);
 	return value;
 }
 

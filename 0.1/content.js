@@ -1,12 +1,7 @@
-var toogle;
-const extension = chrome.extension;
-const port = extension.connect({name: "multiClip"});
-
 function postSelectedText() {
-	var curURL = window.location.href;	
 	var text = window.getSelection().toString();
 	if (text != '') {
-		port.postMessage({clip: text, URL: curURL});
+		chrome.extension.sendRequest({clip: text});
 	} 
 }
 

@@ -2,26 +2,33 @@ var MAX_CLIPPINGS = 5;
 var clipKeysID = "clipData";
 var itemCount = 0;
 var badgeCount = 0;
+var curPort;
 
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) { 
-          if (request.clip && request.clip != "") {
-		var tab = sender.tab;
-		var clip = request.clip
+const extension = chrome.extension;
+      extension.onConnect.addListener(function(port) { 
+	curPort = port;        
+	port.onMessage.addListener(function(data) {
+          if (data.clip && data.clip != "")  
+	        var tab = port.sender.tab;
+		var clip = data.clip
 		chrome.tabs.captureVisibleTab(null, function(dataUrl) {
 						storeClipping(clip, tab, dataUrl);
-						copyToClipboard(clip);
-						sendResponse({text:"Text clipped!"});
+						copyToClipboard(clip, "Text copied to clipboard.");
 						}
 		);
-        }
+        });
 });
 
-function copyToClipboard(text) {
+function postStatusMessage(text) {
+	curPort.postMessage({status:text});
+}
+
+function copyToClipboard(text, status) {
       var mockTextArea = document.getElementById("mock_ta");
       mockTextArea.value = text;
       mockTextArea.select();
       document.execCommand("copy"); 
+      postStatusMessage(status);
 }
 
 function storeClipping(text, tab, snapshot) {

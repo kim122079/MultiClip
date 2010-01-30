@@ -8,10 +8,9 @@ div#popup {
 
 div#popup h1 {
 	background:url(images/multiclip16x16.png) no-repeat left top;
-	height: 25px;
 	padding: 0 0 0 20px;
 	font-size: 12px;
-	border-bottom: 1px solid #ccc;
+	display: inline;
 }
 
 div#popup a {
@@ -23,13 +22,13 @@ div#popup a {
 }
 
 div#popup a.removeAll {
-	text-decoration: none;
+	margin-left: 165px;
 }
 
 div#popup ul#clipList {
 	margin: 5px  0 10px 0;
-	padding: 5px 0px 15px 0;
-	border-bottom: 1px solid #ccc;
+	padding: 5px 0 0 0;
+	border-top: 1px solid #ccc;
 }
 
 div#popup ul#clipList li{

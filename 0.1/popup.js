@@ -16,7 +16,7 @@ function init() {
 			}
 		
 			if(clipItem != "undefined" && clipItem.clippedText != "") {
-				$("#clipList").append('<li id="' + clipID + '"><img src="' + clipItem.snapshotURL + '" width="133" height="100"/><p>' + clipItem.clippedText + '</p><a class="copy">copy</a><a class="delete">remove</a><a class="origin" href="' + clipItem.originURL + '">origin<a/></li>');
+				$("#clipList").append('<li id="' + clipID + '"><img src="' + clipItem.snapshotURL + '" width="133" height="100"/><p>' + clipItem.clippedText + '</p><a class="copy">copy</a><a class="delete">delete</a><a class="origin" href="' + clipItem.originURL + '">url<a/></li>');
 				
 				console.log(clipItem.URL);
 				console.log(clipItem.clippedText);
@@ -28,8 +28,7 @@ function init() {
 
 		$(".copy").mousedown(function(){
 			var text = $(this).prev().text();			
-			chrome.extension.getBackgroundPage().copyToClipboard(text);
-			//showStatusMsg("Text copied to browser clipboard!");
+			chrome.extension.getBackgroundPage().copyToClipboard(text, "Text copied.");
 		});
 		
 		

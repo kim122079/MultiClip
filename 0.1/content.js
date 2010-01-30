@@ -1,10 +1,15 @@
+const port = chrome.extension.connect({name: "MultiClip"});
+
+port.onMessage.addListener( function(msg) {
+  if (msg.status)
+    	showStatusMsg(msg.status);
+});
+
 function postSelectedText() {
 	var text = window.getSelection().toString();
 	if (text != '') {
-		chrome.extension.sendRequest({clip: text}, function(response) {
-			showStatusMsg(response.text);
-		});
-	}
+		port.postMessage({clip: text});
+	} 
 }
 
 $().keypress(function(event) {

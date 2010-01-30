@@ -7,10 +7,10 @@ div#popup {
 }
 
 div#popup h1 {
-	background:url(images/multiclipboard16x16.png) no-repeat left top;
+	background:url(images/multiclip16x16.png) no-repeat left top;
 	height: 25px;
-	padding: 0 0 0 25px;
-	font-size: 15px;
+	padding: 0 0 0 20px;
+	font-size: 12px;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -37,7 +37,7 @@ div#popup ul#clipList li{
 	margin: 0 0 10px 0;
 	color: #000;
 	display:block;
-	background: url(images/multiclipboard_bg2.png) no-repeat bottom center;
+	background: url(images/multiclip_bg.png) no-repeat bottom center;
 }
 
 div#popup ul#clipList li p{
@@ -68,7 +68,7 @@ div#popup ul#clipList li a.origin {
 	font-weight: bold;
 	background: url(http://www.ilimitado.de/labs/multiClip/images/multiclip16x16.png) #fff no-repeat 5px 5px;
 	color: #000;
-	border: 2px solid #AAD04A;
+	border: 2px solid #3399D5;
 	border-top: 0;
 	-webkit-border-bottom-right-radius: 7px;
 	-webkit-border-bottom-left-radius: 7px;
@@ -86,7 +86,7 @@ div#options {
 	margin: 10px 0 0 10px;
 }
 
-h1 {
+div#options h1 {
 	background:url(images/multiclip32x32.png) no-repeat 5px 0;
 	height:32px;
 	text-indent:52px;

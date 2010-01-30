@@ -16,20 +16,20 @@ function init() {
 			}
 		
 			if(clipItem != "undefined" && clipItem.clippedText != "") {
-				$("#clipList").append('<li id="' + clipID + '"><img src="' + clipItem.snapshotURL + '" width="133" height="100"/><p>' + clipItem.clippedText + '</p><a class="copy">copy</a><a class="delete">delete</a><a class="origin" href="' + clipItem.originURL + '">url<a/></li>');
-				
-				console.log(clipItem.URL);
-				console.log(clipItem.clippedText);
-				console.log(clipItem.snapshotURL);
+				$("#clipList").append('<li id="' + clipID + '"><a class="origin" href="' + clipItem.URL + '"><img src="' + clipItem.snapshotURL + '" width="133" height="100"/></a><p class="clippedText">' + clipItem.clippedText + '</p><a class="copy">copy</a><a class="delete">delete</a><a class="origin" href="' + clipItem.URL + '">url<a/></li>');
 			}
 		}
 		
 		chrome.browserAction.setBadgeText({"text": "" + clipIDs.length});
 
-		$(".copy").mousedown(function(){
+		copyTexttoClipboard = function(){
 			var text = $(this).prev().text();			
 			chrome.extension.getBackgroundPage().copyToClipboard(text, "Text copied.");
-		});
+		};	
+
+		$(".clippedText").mousedown(copyTexttoClipboard);
+
+		$(".copy").mousedown(copyTexttoClipboard);
 		
 		
 		$(".delete").mousedown(function(){
@@ -63,6 +63,11 @@ function init() {
 			   	chrome.tabs.create({"url":href});
 			   }
 		});				
+		
+		$(".options").mousedown(function(){
+			   var href = $(this).attr("href");
+			   	chrome.tabs.create({"url":href});
+		});	
 	}
 	else {
 		console.log("failure loading clippings");		

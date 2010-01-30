@@ -37,6 +37,6 @@ $().keypress(function(event) {
     	if (event.which == 3) {
 		postSelectedText();		
 		showDialog();
-                dismissDialog()
+                dismissDialog();
     	}
 });

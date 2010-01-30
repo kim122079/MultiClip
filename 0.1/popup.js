@@ -27,7 +27,9 @@ function init() {
 		chrome.browserAction.setBadgeText({"text": "" + clipIDs.length});
 
 		$(".copy").mousedown(function(){
-			copyTextToClipboard("")
+			var text = $(this).prev().text();			
+			chrome.extension.getBackgroundPage().copyToClipboard(text);
+			//showStatusMsg("Text copied to browser clipboard!");
 		});
 		
 		

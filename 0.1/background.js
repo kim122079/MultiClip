@@ -7,12 +7,22 @@ var badgeCount = 0;
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) { 
           if (request.clip && request.clip != "") {
 		var tab = sender.tab;
+		var clip = request.clip
 		chrome.tabs.captureVisibleTab(null, function(dataUrl) {
-						storeClipping(request.clip, tab, dataUrl);
+						storeClipping(clip, tab, dataUrl);
+						copyToClipboard(clip);
+						sendResponse({text:"Text clipped!"});
 						}
 		);
         }
 });
+
+function copyToClipboard(text) {
+      var mockTextArea = document.getElementById("mock_ta");
+      mockTextArea.value = text;
+      mockTextArea.select();
+      document.execCommand("copy"); 
+}
 
 function storeClipping(text, tab, snapshot) {
 	var clipIDs;

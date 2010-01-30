@@ -16,7 +16,7 @@
    },
    "content_scripts": [ {
       "css": [ "content.css" ],
-      "js": [ "lib/jquery-1.3.2.js", "content.js" ],
+      "js": [ "lib/jquery-1.3.2.js", "lib/utils.js", "content.js" ],
       "matches": [ "http://*/*", "https://*/*"]
    } ]
 }

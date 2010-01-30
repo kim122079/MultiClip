@@ -10,33 +10,10 @@ function postSelectedText() {
 	} 
 }
 
-function showDialog() {
-    	$('body').append(
-    	'<div id="dialog">text clipped!</div>');
-	var xPos = screen.width - 300 + "px";
-	$("#dialog").css("left", xPos);
-	$("#dialog:hidden").toggle("normal", function(){
-   	   sleep(1000);
-    	});
-}
-
-function dismissDialog() {
-	$("#dialog").toggle("normal",function(){
-   	   $("#dialog").remove();
-    	});
-}
-
-function sleep(ms) {
- 	var now=(new Date()).getTime(); 
-        var sleepTime = now + ms; 
-        while((new Date()).getTime() < sleepTime) { };
-}
-
 $().keypress(function(event) {
 	//3 == Strg+Shift+C
     	if (event.which == 3) {
 		postSelectedText();		
-		showDialog();
-                dismissDialog();
+		showStatusMsg("Text clipped!");
     	}
 });

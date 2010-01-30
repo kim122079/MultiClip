@@ -1,77 +1,120 @@
-div#wrapper {
-  width: 300px;
-  height: auto;
-  background-color: #fff;
-  color: #4D4D4E;
+/* popup.html*/
+div#popup {
+	width: 300px;
+	height: auto;
+	background-color: #fff;
+	color: #4D4D4E;
 }
 
-div#wrapper h1 {
-  color: #4D4D4E;
-  background:url(multiclipboard_icon_v2_19x19.png) no-repeat left top;
-  height: 25px;
-  padding: 0 0 0 25px;
-  font-size: 15px;
-  border-bottom: 1px solid #ccc;
+div#popup h1 {
+	background:url(images/multiclipboard16x16.png) no-repeat left top;
+	height: 25px;
+	padding: 0 0 0 25px;
+	font-size: 15px;
+	border-bottom: 1px solid #ccc;
 }
 
-div#wrapper ul#clipList {
-  margin: 5px  0 10px 0;
-  padding: 5px 0px 15px 0;
-  border-bottom: 1px solid #ccc;
+div#popup a {
+	text-decoration: underline;
+	color: #000;
+	color: #3399D5;
+	font-size: 12px;
+	cursor:pointer;
 }
 
-div#wrapper ul#clipList li{
-  padding: 5px 0 7px 0;
-  margin: 0 0 10px 0;
-  color: #000;
-  display:block;
-  background: url("multiclipboard_bg2.png") no-repeat bottom center;
+div#popup a.removeAll {
+	text-decoration: none;
 }
 
-div#wrapper ul#clipList li p{
-  width: 300px;
-  margin: 0 0 10px 0;
-  font-size: 12px;
-  font-weight: bold;
+div#popup ul#clipList {
+	margin: 5px  0 10px 0;
+	padding: 5px 0px 15px 0;
+	border-bottom: 1px solid #ccc;
 }
 
-div#wrapper ul#clipList li img{
-  display: block;
-  float:left;
-  margin: 5px 5px 5px 0;
+div#popup ul#clipList li{
+	padding: 5px 0 7px 0;
+	margin: 0 0 10px 0;
+	color: #000;
+	display:block;
+	background: url(images/multiclipboard_bg2.png) no-repeat bottom center;
 }
 
-div#wrapper a {
-  text-decoration: underline;
-  color: #000;
-  color: #3399D5;
-  font-size: 12px;
-  cursor:pointer
+div#popup ul#clipList li p{
+	width: 300px;
+	margin: 0 0 10px 0;
+	font-size: 12px;
+	font-weight: bold;
 }
 
-div#wrapper a.removeAll {
-  text-decoration: none;
+div#popup ul#clipList li img{
+	display: block;
+	float:left;
+	margin: 5px 5px 5px 0;
 }
 
-div#wrapper ul#clipList a{
-  margin: 0 0 0 80px;
+div#popup ul#clipList a{
+	margin: 0 0 0 80px;
 }
 
-div#wrapper ul#clipList li a.delete, 
-div#wrapper ul#clipList li a.origin {
-  margin: 0 0 0 20px;
+div#popup ul#clipList li a.delete, 
+div#popup ul#clipList li a.origin {
+  	margin: 0 0 0 20px;
 }
 
-div#dialog {
-  background: url(http://www.ilimitado.de/labs/multiclipboard_icon_v2_39x39.png) #fff no-repeat 15px 3px;
-  position: fixed;
-  top: 30px;
-  z-index: 2000000;
-  display: none;
-  border: 3px solid #3399D5;
-  color: #3399D5;
-  width: 150px;  
-  padding: 10px 10px 10px 70px;
-  font-size: 20px;
-  font-weight:bold;
+/* utils.js*/
+#status {
+	font-size: 12px;
+	font-weight: bold;
+	background: url(http://www.ilimitado.de/labs/multiClip/images/multiclip16x16.png) #fff no-repeat 5px 5px;
+	color: #000;
+	border: 2px solid #AAD04A;
+	border-top: 0;
+	-webkit-border-bottom-right-radius: 7px;
+	-webkit-border-bottom-left-radius: 7px;
+	padding: 5px 5px 5px 25px;
+	display: none;	
+	position: fixed;
+        top: 0;
+	z-index: 2000000;
+}
+
+/* options.html*/
+
+div#options {
+	width:220px;	
+	margin: 10px 0 0 10px;
+}
+
+h1 {
+	background:url(images/multiclip32x32.png) no-repeat 5px 0;
+	height:32px;
+	text-indent:52px;
+	font-size:20px;
+	padding: 5px 0 0 0;
+	margin: 0;
+}
+
+div#options-form {
+	background:#0092ef;
+	padding:20px 20px 5px 20px;
+	border:2px solid black;
+	line-height:1.5em;
+}
+
+div#options-form #save {
+	margin: 5px 0 0 0;	
+}
+
+
+div#options-form input[type=text] {
+	width:168px;
+	height:52px;
+	border:4px solid #555;
+	font-size:24pt;
+	margin: 0 0 20px 0;
+}
+
+div#options-form input[type=checkbox] {
+	margin: 0 0 20px 0;
 }

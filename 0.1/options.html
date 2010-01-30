@@ -1,102 +1,29 @@
 <html>
 <head>
 	<title>MultiClip Options</title>
-	<style type="text/css">
-	h1
-	{
-		background:url(multiclip32x32.png) no-repeat 5px 0;
-		height:32px;
-		text-indent:52px;
-		font-size:20px;
-		padding: 5px 0 0 0;
-	}
-
-
-	#optionWrapper
-	{
-		width:220px;
-		background:#0092ef;
-		padding:20px 20px 5px 20px;
-		border:2px solid black;
-		line-height:1.5em;
-	}
-	
-	#save
-	{
-		margin: 5px 0 0 0;	
-	}
-
-	#status 
-	{
-		color: #fff;
-		margin: 20px 0 0 0;
-	}
-
-	input[type=text]
-	{
-		width:168px;
-		height:52px;
-		border:4px solid #555;
-		font-size:24pt;
-		margin: 0 0 20px 0;
-	}
-
-	input[type=checkbox]
-	{
-		margin: 0 0 20px 0;
-	}
-
-	</style>
+	<link rel='stylesheet' type='text/css' href='content.css' media='all' />
+	<script language="javascript" type="text/javascript" src="lib/jquery-1.3.2.js"></script>
+	<script language="javascript" type="text/javascript" src="lib/utils.js"></script>
+	<script language="javascript" type="text/javascript" src="options.js"></script>
 </head>
 
-<script type="text/javascript">
-function save_options()
-{
-	var clipSize = document.getElementById('clipboard_size').value;
-
-	if (clipSize)
-	{
-		localStorage["clipboard_size"] = clipSize;
-	}
-
-	var status = document.getElementById('status');
-	status.innerHTML = "Options Saved.";
-	setTimeout(function()
-	{
-		status.innerHTML = "";
-	},1500);
-}
-
-function restore_options()
-{
-	document.getElementById('clipboard_size').value = localStorage["clipboard_size"] || '' ;
-
-}
-
-</script>
-
 <body onload="restore_options()">
-
-<h1>MultiClip Options</h1>
-
-
-<div id="optionWrapper">
-
-	<label for="clipboard_size">Enter clipboard size:</label>
-	<br/>
-	<input type="text" id="clipboard_size" value=""/>
-	<br/>
-	<input type="checkbox" id="show_screenshot"/> 
-	<label for="show_screenshot">show screenshot</label>
-	<br/>
-	<input type="checkbox" id="show_status_message"/> 
-	<label for="show_status_message">show status message</label>
-	<br/>
-
-	<button id="save" onclick="save_options()">Save</button>
-	<div id="status"></div>
-</div>
-
+	<div id=options>
+		<h1>MultiClip Options</h1>
+		<div id="options-form">
+			<label for="clipboard_size">Enter clipboard size:</label>
+			<br/>
+			<input type="text" id="clipboard_size" value=""/>
+			<br/>
+			<input type="checkbox" id="show_screenshot"/> 
+			<label for="show_screenshot">show screenshot</label>
+			<br/>
+			<input type="checkbox" id="show_status_message"/> 
+			<label for="show_status_message">show status message</label>
+			<br/>
+			<button id="save" onclick="save_options()">Save</button>
+		</div>
+	</div>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 var toogle;
 const extension = chrome.extension;
-const port = extension.connect({name: "clipper"});
+const port = extension.connect({name: "multiClip"});
 
 function postSelectedText() {
 	var curURL = window.location.href;	

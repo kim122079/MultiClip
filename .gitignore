@@ -1,2 +1,4 @@
 #Ignore gedit tmp files 
 *.*~
+*.crx
+*.pem

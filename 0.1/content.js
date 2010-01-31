@@ -17,7 +17,7 @@ function postSelectedText(text) {
 $().keypress(function(event) {
 	//3 == Strg+Shift+C
     	if (event.which == 3) {
-		postSelectedText(window.getSelection().toString());		
+		postSelectedText(getTextSelection());		
     	}
 });
 
@@ -32,8 +32,28 @@ $().mouseup(function(){
 		showDialog(pageX, pageY);
 });
 
+
+function getTextSelection() {
+  var selection = window.getSelection();
+  var pageFrames = document.getElementsByTagName("iframe");
+  for (i=0; i<pageFrames.length; i++) {
+    if (pageFrames[i].contentDocument != null) {
+	 var frameSelection = pageFrames[i].contentDocument.getSelection();
+ 	 if (frameSelection != null) {
+        	selection = frameSelection;
+      }
+    }
+  }
+  if (selection != null) {
+    return selection.toString();
+  }
+  else {
+    return "";
+  }
+}
+
 function showDialog(xPos, yPos) {
-	var selection = window.getSelection().toString();
+	var selection = getTextSelection();
 	var active;
 	if(selection != null && selection != "") {
 		active = true;		

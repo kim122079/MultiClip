@@ -184,3 +184,13 @@ div#options-form input[type=text] {
 div#options-form input[type=checkbox] {
 	margin: 0 0 10px 0;
 }
+
+div#options a#code {
+	margin: 0 0 10px 5px;
+	color: #000;
+}
+
+div#options span#contact {
+	float: right;
+	margin: 0 5px 10px 0;
+}

@@ -36,7 +36,8 @@ var options = {
 
 const extension = chrome.extension;
       extension.onConnect.addListener(function(port) { 
-	curPort = port;        
+	curPort = port;
+	curPort.postMessage({clipDialog: {status:options.dialogonmouseup}});       
 	port.onMessage.addListener(function(data) {
           if (data.clip && data.clip != "")  
 	        var tab = port.sender.tab;

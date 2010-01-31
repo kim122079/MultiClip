@@ -7,6 +7,8 @@ var dialogLock = 0;
 port.onMessage.addListener( function(msg) {
   if (msg.status)
     	showStatusMsg(msg.status);
+  if (msg.clipDialog)
+    	clipDialog = msg.clipDialog.status;
 });
 
 function postSelectedText(text) {
@@ -22,7 +24,7 @@ $().keypress(function(event) {
     	}
 });
 
-$().mousemove(function(event){
+$('body').mousemove(function(event){
 	pageX = event.pageX;
 	pageY = event.pageY;
 });
@@ -71,7 +73,7 @@ function showDialog(xPos, yPos) {
 	if(selection != null && selection != "") {
 		active = true;		
 		$('body').append('<div id="dialog">clip</div>');
-		$("#dialog").css("left", xPos-2).css("top", yPos-46);
+		$("#dialog").css("left", xPos).css("top", yPos);
 		$("#dialog:hidden").toggle("fast");	
 		$().mousedown(function(){
 			if(active) {

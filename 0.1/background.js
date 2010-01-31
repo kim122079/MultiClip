@@ -12,18 +12,21 @@ var options = {
 		setClip("clipboardsize", val);
 	},
 	get screenshot() {
+		if(getClip("screenshot") == null) return true;		
 		return getClip("screenshot") == 'true' ? true : false;
 	},
 	set screenshot(val) {
 		setClip("screenshot", val);
 	},
 	get dialogonmouseup() {
+		if(getClip("dialogonmouseup") == null) return true;		
 		return getClip("dialogonmouseup") == 'true' ? true : false;
 	},
 	set dialogonmouseup(val) {
 		setClip("dialogonmouseup", val);
 	},
 	get statusmessages() {
+		if(getClip("statusmessages") == null) return true;				
 		return getClip("statusmessages") == 'true' ? true : false;
 	},
 	set statusmessages(val) {
@@ -53,7 +56,9 @@ const extension = chrome.extension;
 });
 
 function postStatusMessage(text) {
-	curPort.postMessage({status:text});
+	if(options.statusmessages) { 
+		curPort.postMessage({status:text});
+	}
 }
 
 function copyToClipboard(text, status) {

@@ -34,18 +34,18 @@ $().mouseup(function(){
 
 
 function getTextSelection() {
-  var selection = window.getSelection();
+  var selection = window.getSelection().toString();
   var pageFrames = document.getElementsByTagName("iframe");
   for (i=0; i<pageFrames.length; i++) {
     if (pageFrames[i].contentDocument != null) {
-	 var frameSelection = pageFrames[i].contentDocument.getSelection();
- 	 if (frameSelection != null) {
+	 var frameSelection = pageFrames[i].contentDocument.getSelection().toString();
+ 	 if (frameSelection != "") {
         	selection = frameSelection;
       }
     }
   }
   if (selection != null) {
-    return selection.toString();
+    return selection;
   }
   else {
     return "";

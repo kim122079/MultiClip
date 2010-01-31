@@ -2,6 +2,7 @@ const port = chrome.extension.connect({name: "MultiClip"});
 var pageX;
 var pageY;
 var clipDialog = true;
+var dialogLock = 0;
 
 port.onMessage.addListener( function(msg) {
   if (msg.status)
@@ -28,8 +29,11 @@ $().mousemove(function(event){
 
 
 $().mouseup(function(){
-	if(clipDialog)	
+	
+	if(clipDialog && !isLocked()) {
 		showDialog(pageX, pageY);
+		lock();
+	}
 });
 
 
@@ -52,6 +56,15 @@ function getTextSelection() {
   }
 }
 
+function isLocked() {
+	var now = new Date().getTime();	
+	return now < dialogLock;
+}
+
+function lock() {
+	dialogLock = new Date().getTime() + 1000;
+}
+
 function showDialog(xPos, yPos) {
 	var selection = getTextSelection();
 	var active;
@@ -70,7 +83,7 @@ function showDialog(xPos, yPos) {
 		});
 
 		$("#dialog").mousedown(function(){
-			postSelectedText(selection);
+				postSelectedText(selection);
 		});
 		setTimeout(function() {
 			$("#dialog").toggle("fast",function(){

@@ -71,8 +71,7 @@ function init() {
 		});				
 		
 		$(".options").mousedown(function(){
-			   var href = $(this).attr("href");
-			   	chrome.tabs.create({"url":href});
+	   		chrome.tabs.create({"url":"options.html"});
 		});	
 	}
 	else {

@@ -71,7 +71,8 @@ function init() {
 		});				
 		
 		$(".options").mousedown(function(){
-	   		chrome.tabs.create({url : "options.html"}); 
+			   var href = $(this).attr("href");
+			   chrome.extension.getBackgroundPage().createTab({url:href});
 		});	
 	}
 	else {
@@ -87,8 +88,4 @@ function flushClippings() {
 	clipList.slideUp("fast",function(){
 		clipList.remove();
         });	
-}
-
-function copyTextToClipboard(text) {
-	alert("Chrome does not support copying text to clipboard yet. Coming soon...")
 }

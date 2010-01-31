@@ -44,7 +44,7 @@ function init() {
 			   parent.slideUp("fast",function(){
 				var parent1 = parent;   	       	   
 				parent.remove();
-				chrome.extension.getBackgroundPage().removeClippings(clipID);
+				chrome.extension.getBackgroundPage().removeClipping(clipID);
 	   		   });
 		});
 		
@@ -76,14 +76,15 @@ function init() {
 		});	
 	}
 	else {
-		console.log("failure loading clippings");		
+		console.log("failure loading clippings");
+		chrome.browserAction.setBadgeText({"text": "0"});		
 		return;		
 	}	
 }
       
 function flushClippings() {
 	var clipList = $("#clipList");
-	chrome.extension.getBackgroundPage().flushClippings();
+	chrome.extension.getBackgroundPage().removeClippings();
 	clipList.slideUp("fast",function(){
 		clipList.remove();
         });	

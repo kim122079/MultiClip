@@ -115,7 +115,17 @@ function getClippings() {
 	return getClip(clipKeysID);
 }
 
-function removeClippings(key) {
+function removeClippings() {
+	var clipIDs = getClip(clipKeysID).split(",");
+	
+	for(var i = 0; i<clipIDs.length; i++) {
+		removeClip(clipIDs[i]);		
+	}
+	removeClip(clipKeysID);
+	updateBadge(0);
+}
+
+function removeClipping(key) {
 	var newClipIDs = new Array();		
 	var oldClipIDs = getClip(clipKeysID).split(",");
 	

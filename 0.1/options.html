@@ -11,20 +11,37 @@
 	<div id=options>
 		<h1>MultiClip Options</h1>
 		<div id="options-form">
-			<label for="clipboard_size">Enter clipboard size:</label>
+			<label for="clipboard_size">Enter MultiClipboard size:</label>
 			<br/>
 			<input type="text" id="clipboard_size" value=""/>
+			<p>Choose MultiClipboard size in numbers [0-50].</p>
 			<br/>
 			<input type="checkbox" id="show_screenshot"/> 
-			<label for="show_screenshot">show screenshot</label>
+			<label for="show_screenshot">Show screenshot</label>
+			<p>If checked, a screenshot of the website text was clipped from will be shown next to the clipped text.</p>
 			<br/>
 			<input type="checkbox" id="show_dialog_onmouseup"/> 
-			<label for="show_screenshot">show dialog onmouseup</label>
+			<label for="show_screenshot">Show dialog on releasing mouse key</label>
+			<p>If checked, a dialog will be shown next to the selected text. If the dialog is clicked, the currently selected text is clipped to MultiClipboard and also to the browser clipboard.</p>
 			<br/>
 			<input type="checkbox" id="show_status_messages"/> 
-			<label for="show_status_messages">show status messages</label>
+			<label for="show_status_messages">Show status messages</label>
+			<p>If checked, status messages, i.e. when text is clipped to MultiClipboard, or copied to the browser clipboard, will be shown below the omnibox.</p>
 			<br/>
-			<button id="save" onclick="save_options()">Save</button>
+			<button id="save" onclick="save_options()">Save Settings</button>
+			<div id = usage>
+				<h1>Usage:</h1>
+				<ul>
+					<li>Select any text on any website and press <strong>Ctrl+Shift+C</strong> to copy text to your MultiClipboard</li>
+					<li>If "Show dialog on releasing mouse key" is checked a small dialog will be shown, when you selected your text. Click the dialog to copy text to 
+					your MultiClipboard</li>
+					<li>Text that is copied to your clipboard is also copied to your browser clipboard, like if you would normally use Strg+C</li>
+					<li>Your MultiClipboard is located to the right of your omnibox. Open your MultiClipboard by clicking on the extension icon</li>
+					<li>On your MultiClipboard you can copy the selected text to the browser clipboard, delete your text or go to the origin URL</li>
+					<li>Quick copy text from your MultiClipboard by clicking the clipped text </li>
+					<li>Quick access the origin URL by clicking the screenshot, next to your clipped text</li>
+				</ul>			
+			</div>
 		</div>
 	</div>
 </body>

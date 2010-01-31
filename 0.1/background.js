@@ -145,10 +145,6 @@ function removeClipping(key) {
 	updateBadge(newClipIDs.length);
 }
 
-function createTab(url) {
-	chrome.tabs.create(url);
-}
-
 function setClip(key, value) {
 	try {
 		window.localStorage.removeItem(key);

@@ -69,11 +69,6 @@ function init() {
 			   	chrome.tabs.create({"url":href});
 			   }
 		});				
-		
-		$(".options").mousedown(function(){
-			   var href = $(this).attr("href");
-			   chrome.extension.getBackgroundPage().createTab({url:href});
-		});	
 	}
 	else {
 		console.log("failure loading clippings");
@@ -88,4 +83,8 @@ function flushClippings() {
 	clipList.slideUp("fast",function(){
 		clipList.remove();
         });	
+}
+
+function openOptions() {
+	chrome.tabs.create({url:"options.html"});	
 }

@@ -1,8 +1,35 @@
-var MAX_CLIPPINGS = 5;
 var clipKeysID = "clipData";
 var itemCount = 0;
 var badgeCount = 0;
 var curPort;
+
+var options = {
+	get clipboardsize() {
+        if(getClip("clipboardsize") == 'NaN' || getClip("clipboardsize") == null) return 5;
+		return getClip("clipboardsize");
+	},
+	set clipboardsize(val) {
+		setClip("clipboardsize", val);
+	},
+	get screenshot() {
+		return getClip("screenshot") == 'true' ? true : false;
+	},
+	set screenshot(val) {
+		setClip("screenshot", val);
+	},
+	get dialogonmouseup() {
+		return getClip("dialogonmouseup") == 'true' ? true : false;
+	},
+	set dialogonmouseup(val) {
+		setClip("dialogonmouseup", val);
+	},
+	get statusmessages() {
+		return getClip("statusmessages") == 'true' ? true : false;
+	},
+	set statusmessages(val) {
+		setClip("statusmessages", val);
+	}
+};
 
 const extension = chrome.extension;
       extension.onConnect.addListener(function(port) { 
@@ -11,11 +38,17 @@ const extension = chrome.extension;
           if (data.clip && data.clip != "")  
 	        var tab = port.sender.tab;
 		var clip = data.clip
-		chrome.tabs.captureVisibleTab(null, function(dataUrl) {
-						storeClipping(clip, tab, dataUrl);
-						copyToClipboard(clip, "Text copied to clipboard.");
-						}
-		);
+		if(options.screenshot) {		
+			chrome.tabs.captureVisibleTab(null, function(dataUrl) {
+							storeClipping(clip, tab, dataUrl);
+							copyToClipboard(clip, "Text copied to clipboard.");
+							}
+			);
+		}
+		else {
+			storeClipping(clip, tab, "");
+			copyToClipboard(clip, "Text copied to clipboard.");
+		}
         });
 });
 
@@ -49,7 +82,11 @@ function storeClipping(text, tab, snapshot) {
 	clipItem.clippedText = text;
 	clipItem.snapshotURL = snapshot;
 	
-	if(clipIDs.length >= MAX_CLIPPINGS) {
+	console.log(options.clipboardsize);
+	console.log(options.screenshot);
+	console.log(options.dialogonmouseup);
+	console.log(options.statusmessages);
+	if(clipIDs.length >= options.clipboardsize) {
 		var clipID = clipIDs.pop();
 		removeClip(clipID);
 	}

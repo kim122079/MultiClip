@@ -16,7 +16,13 @@ function init() {
 			}
 		
 			if(clipItem != "undefined" && clipItem.clippedText != "") {
-				$("#clipList").append('<li id="' + clipID + '"><a class="origin" href="' + clipItem.URL + '"><img src="' + clipItem.snapshotURL + '" width="133" height="100"/></a><p class="clippedText">' + clipItem.clippedText + '</p><a class="copy">copy</a><a class="delete">delete</a><a class="origin" href="' + clipItem.URL + '">url<a/></li>');
+				var screenshotIMG = clipItem.snapshotURL != '' ? '<a class="origin" href="' + clipItem.URL + '"><img src="' +
+						      clipItem.snapshotURL + '" width="133" height="100"/></a>' : "";				
+				
+				$("#clipList").append('<li id="' + clipID + '"></li>');
+				$("#" + clipID).append(screenshotIMG)
+				               .append('<p class="clippedText">' + clipItem.clippedText + '</p>')
+				               .append('<a class="copy">copy</a><a class="delete">delete</a><a class="origin" href="' + clipItem.URL + '">url<a/>');
 			}
 		}
 		

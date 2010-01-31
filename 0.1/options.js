@@ -1,16 +1,18 @@
+var bgPage = chrome.extension.getBackgroundPage();
+
 function save_options()
 {
-	localStorage["clipboard_size"] = document.getElementById('clipboard_size').value;
-	localStorage["show_screenshot"] = document.getElementById('show_screenshot').checked;
-	localStorage["show_dialog_onmouseup"] = document.getElementById('show_dialog_onmouseup').checked;
-	localStorage["show_status_messages"] = document.getElementById('show_status_messages').checked;
+	bgPage.options.clipboardsize = $('#clipboard_size').val();
+	bgPage.options.screenshot = $('#show_screenshot')[0].checked;	
+	bgPage.options.dialogonmouseup = $('#show_dialog_onmouseup')[0].checked;	
+	bgPage.options.statusmessages = $('#show_status_messages')[0].checked;		
 	showStatusMsg("Options saved!");
 }
 
 function restore_options()
 {
-	document.getElementById('clipboard_size').value = localStorage["clipboard_size"] || '5' ;
-	document.getElementById('show_screenshot').checked = localStorage["show_screenshot"] || '1' ;
-	document.getElementById('show_dialog_onmouseup').checked = localStorage["show_dialog_onmouseup"] || '1' ;
-	document.getElementById('show_status_messages').checked = localStorage["show_status_messages"] || '1' ;
+	$('#clipboard_size').val(bgPage.options.clipboardsize);
+	$('#show_screenshot')[0].checked = bgPage.options.screenshot;
+	$('#show_dialog_onmouseup')[0].checked = bgPage.options.dialogonmouseup;
+	$('#show_status_messages')[0].checked = bgPage.options.statusmessages;
 }

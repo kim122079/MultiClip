@@ -74,7 +74,7 @@ div#popup ul#clipList li a.origin {
 }
 
 /* utils.js*/
-#status {
+div#status {
 	font-size: 12px;
 	font-weight: bold;
 	background: url(http://www.ilimitado.de/labs/multiClip/images/multiclip16x16.png) #fff no-repeat 5px 5px;
@@ -88,6 +88,20 @@ div#popup ul#clipList li a.origin {
 	position: fixed;
         top: 0;
 	z-index: 2000000;
+}
+
+div#dialog {
+	background: url(http://www.ilimitado.de/labs/multiClip/images/multiclip16x16.png) #fff no-repeat 6px 3px;
+	position: fixed;
+	z-index: 2000000;
+	display: none;
+	border: 2px solid #3399D5;
+	-webkit-border-radius: 5px;
+	display: none;	
+	color: #3399D5;
+	padding: 17px 3px 0 3px;
+	font-size: 12px;
+	font-weight:bold;
 }
 
 /* options.html*/

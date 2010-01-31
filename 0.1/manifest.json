@@ -1,6 +1,6 @@
 {
-   "name": "Multiclip",
-   "description": "Clip multiple text snippets.",
+   "name": "MultiClip",
+   "description": "Select text snippets from any webpage and clip them to your MultiClipboard.",
    "version": "0.1",
    "icons": { "48": "images/multiclip48x48.png",
               "128": "images/multiclip128x128.png" },   
@@ -11,7 +11,7 @@
    "background_page": "background.html",
    "browser_action": {
       "default_icon": "images/multiclip16x16.png",
-      "default_title": "Multiclipboard",
+      "default_title": "Press Ctrl+Shift+C to clip selected text.",
       "popup" : "popup.html"
    },
    "content_scripts": [ {

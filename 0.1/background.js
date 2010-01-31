@@ -5,7 +5,7 @@ var curPort;
 
 var options = {
 	get clipboardsize() {
-        if(getClip("clipboardsize") == 'NaN' || getClip("clipboardsize") == null) return 5;
+        if(getClip("clipboardsize") == 'NaN' || getClip("clipboardsize") == null) return 3;
 		return getClip("clipboardsize");
 	},
 	set clipboardsize(val) {

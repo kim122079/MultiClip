@@ -71,7 +71,7 @@ function init() {
 		});				
 		
 		$(".options").mousedown(function(){
-	   		chrome.tabs.create({"url":"options.html"});
+	   		chrome.tabs.create({url : "options.html"}); 
 		});	
 	}
 	else {

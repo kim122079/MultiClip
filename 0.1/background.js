@@ -37,7 +37,12 @@ var options = {
 const extension = chrome.extension;
       extension.onConnect.addListener(function(port) { 
 	curPort = port;
-	curPort.postMessage({clipDialog: {status:options.dialogonmouseup}});      
+	curPort.postMessage({clipDialog: {status:options.dialogonmouseup}});
+	var badgeText = getClip("badgeText");
+	if(badgeText == "null")
+		updateBadge("0");
+	else
+		updateBadge(badgeText);	
 	port.onMessage.addListener(function(data) {
           if (data.clip && data.clip != "")  
 	        var tab = port.sender.tab;
@@ -108,7 +113,9 @@ function storeClipping(text, tab, snapshot) {
 }
 
 function updateBadge(badgeCount) {
-	chrome.browserAction.setBadgeText({"text": "" + badgeCount});
+	var badgeText = "" + badgeCount;
+	setClip("badgeText", badgeText);	
+	chrome.browserAction.setBadgeText({"text": badgeText});
 }
 
 function getClippings() {

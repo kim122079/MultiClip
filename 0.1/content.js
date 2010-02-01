@@ -91,6 +91,6 @@ function showDialog(xPos, yPos) {
 			$("#dialog").toggle("fast",function(){
    	   			$("#dialog").remove();
     			});
-		},3000);
+		},5000);
 	}
 }
